@@ -1,21 +1,37 @@
+using Microsoft.AspNetCore.Routing.Constraints;
+
 namespace WebApplication2
 {
     public class Program
     {
-        public static async void Main(string[] args)
+        public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
             builder.Services.AddControllersWithViews();
             var app = builder.Build();
             app.UseRouting();
-            app.MapGet("/", () => "Hello World!");
-            app.MapGet("/bato", () => "Hello World!");
-            app.MapGet("/{name}",   async context =>
+           app.MapGet("/", () => "Hello World!");
+            // app.MapGet("/index", () => "Hello from index");
+            app.MapControllerRoute
+                (name: default,
+                pattern: "{Controller=Movies}/{Action=Index}/{Id:regex(^\\d{{2}}$)?}",// id is optional
+               // defaults: new { action = "Index", controller = "Movies" },
+                 //constraints: new {Id= new IntRouteConstraint()}
+                 constraints: new { Id = @"\d{2}" }
+                ); 
 
-            { 
-                var Name = context.GetRouteValue("name");
-                await context.Response.WriteAsync($"Hello {Name}");
-            });
+            // app.MapGet("/bato", () => "Hello World!");
+            // app.MapGet("/{name}",   async context =>
+            //  app.MapGet("/x{name}",   async context =>
+
+
+            //{
+            // var Name = context.GetRouteValue("name");
+            //  await context.Response.WriteAsync($"Hello {Name}");
+            //    await context.Response.WriteAsync($"Hello {context.Request.RouteValues["name"]}");
+
+
+            //});
             app.Run();
         }
     }
