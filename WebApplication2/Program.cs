@@ -13,11 +13,11 @@ namespace WebApplication2
            app.MapGet("/", () => "Hello World!");
             // app.MapGet("/index", () => "Hello from index");
             app.MapControllerRoute
-                (name: default,
-                pattern: "{Controller=Movies}/{Action=Index}/{Id:regex(^\\d{{2}}$)?}",// id is optional
-               // defaults: new { action = "Index", controller = "Movies" },
-                 //constraints: new {Id= new IntRouteConstraint()}
-                 constraints: new { Id = @"\d{2}" }
+                (name: "default",
+                pattern: "{Controller=Movies}/{Action=Index}/{Id:int?}"// id is optional {Id:regex(^\\d{{2}}$)?}
+                                                               // defaults: new { action = "Index", controller = "Movies" },
+                                                               //constraints: new {Id= new IntRouteConstraint()}
+                // constraints: new { Id = @"\d{2}" }
                 ); 
 
             // app.MapGet("/bato", () => "Hello World!");
