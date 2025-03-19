@@ -10,11 +10,12 @@ namespace WebApplication2
             builder.Services.AddControllersWithViews();
             var app = builder.Build();
             app.UseRouting();
-           app.MapGet("/", () => "Hello World!");
+            // app.MapGet("/", () => "Hello World!");
             // app.MapGet("/index", () => "Hello from index");
+            app.UseStaticFiles();
             app.MapControllerRoute
                 (name: "default",
-                pattern: "{Controller=Movies}/{Action=Index}/{Id:int?}"// id is optional {Id:regex(^\\d{{2}}$)?}
+                pattern: "{Controller=Home}/{Action=Index}/{Id:int?}"// id is optional {Id:regex(^\\d{{2}}$)?}
                                                                // defaults: new { action = "Index", controller = "Movies" },
                                                                //constraints: new {Id= new IntRouteConstraint()}
                 // constraints: new { Id = @"\d{2}" }
