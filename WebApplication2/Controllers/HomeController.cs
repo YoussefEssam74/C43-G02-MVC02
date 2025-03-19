@@ -18,6 +18,14 @@ namespace WebApplication2.Controllers
         {
             return View();
         }
+        public IActionResult AboutUs()
+        {
+            return View();
+        }
+        public IActionResult ContactUs()
+        {
+            return View();
+        }
 
     }
 }
